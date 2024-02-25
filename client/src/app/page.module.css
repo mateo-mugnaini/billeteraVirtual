@@ -1,0 +1,22 @@
+.ContenedorGeneral {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  gap: 2rem;
+  background-color: red;
+}
+
+.ContenedorBotones {
+  width: 50%;
+  display: flex;
+  gap: 2rem;
+}
+
+.Botones {
+  width: 100%;
+  background-color: blue;
+  text-align: center;
+}
