@@ -1,0 +1,25 @@
+.ContenedorGeneral {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.Label {
+  display: flex;
+  flex-direction: column;
+}
+
+.Input {
+  width: 20rem;
+  height: 3rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.4rem;
+}
+
+.Input:focus {
+  box-shadow: 0 0 20px #262626dd;
+}

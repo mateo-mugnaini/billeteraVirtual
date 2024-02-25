@@ -1,0 +1,77 @@
+.ContenedorGeneral {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #262626;
+  color: #d9d3c1;
+}
+
+.ContenedorIzq {
+  transition: transform 0.7s ease;
+  flex-direction: row;
+}
+.ContenedorDer {
+  transition: transform 0.7s ease;
+  flex-direction: row-reverse;
+}
+
+.AuthContainer {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.7s ease;
+  overflow: none;
+}
+
+.ContenedorTitulo {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+}
+
+/* .LoginLeft {
+  transform: translateX(-78%);
+}
+
+.RegisterRight {
+  transform: translateX(78%);
+} */
+/* 
+.TituloIzq {
+  position: absolute;
+  top: 50%;
+  right: 20rem; 
+  transform: translate(0, -50%);
+}
+
+.TituloDer {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translate(0, -50%);
+} */
+
+.Contenedor1 {
+  background-color: #d9d3c1;
+  color: #262626;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 600px;
+  height: 100vh;
+}
+
+.ContenedorLogin {
+  border-top-right-radius: 8rem;
+  border-bottom-right-radius: 8rem;
+  transition: border-radius 0.2s ease;
+}
+
+.ContenedorRegister {
+  border-top-left-radius: 8rem;
+  border-bottom-left-radius: 8rem;
+  transition: border-radius 0.2s ease;
+}

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "@/redux/actions/userActions";
+import styles from "../pages.module.css";
 
 const Registro = () => {
   const dispatch = useDispatch();
@@ -36,28 +37,41 @@ const Registro = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        placeholder="Nombre de usuario"
-      />
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="Correo electrónico"
-      />
-      <input
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="Contraseña"
-      />
+    <form className={styles.ContenedorGeneral} onSubmit={handleSubmit}>
+      <label className={styles.Label}>
+        Usuario:
+        <input
+          className={styles.Input}
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          placeholder="Nombre de usuario"
+        />
+      </label>
+      <label className={styles.Label}>
+        Correo:
+        <input
+          className={styles.Input}
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Correo electrónico"
+        />
+      </label>
+      <label className={styles.Label}>
+        Contraseña:
+        <input
+          className={styles.Input}
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Contraseña"
+        />
+      </label>
+
       <button type="submit">Registrarse</button>
     </form>
   );

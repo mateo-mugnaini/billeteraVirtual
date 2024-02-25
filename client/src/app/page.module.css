@@ -1,22 +1,61 @@
 .ContenedorGeneral {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
   width: 100%;
   height: 100vh;
   gap: 2rem;
-  background-color: red;
+  background-color: #268ea6;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: "Rubik";
+  color: var(--fontPrimary);
 }
 
-.ContenedorBotones {
-  width: 50%;
+.ContenedorBtnOut {
   display: flex;
+  margin: 1rem 1rem 0 0;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  height: 10%;
+  width: 100%;
+}
+
+.BtnOut {
+  background-color: #d9d3c1;
+  color: #262626;
+  font-size: 1rem;
+  padding: 0.8rem 1.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+.BtnOut:hover {
+  background-color: #262626;
+  color: #d9d3c1;
+}
+
+.ContenedorContenido {
+  display: flex;
+  background-color: #262626dd;
+  box-shadow: 0 0 70px #262626dd;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 60%;
+  border-radius: 6%;
+}
+.ContenedorContenido2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 2rem;
 }
 
-.Botones {
-  width: 100%;
-  background-color: blue;
-  text-align: center;
+.Titulo {
+  font-size: 3rem;
+  font-variant: normal;
 }

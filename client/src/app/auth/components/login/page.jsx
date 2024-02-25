@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../redux/actions/userActions";
 import { useRouter } from "next/navigation";
+import styles from "../pages.module.css";
 
 const Login = () => {
   const router = useRouter();
@@ -33,20 +34,24 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <label>
+    <form className={styles.ContenedorGeneral} onSubmit={handleLogin}>
+      <label className={styles.Label}>
         Usuario:
         <input
+          className={styles.Input}
           type="text"
           value={email}
+          placeholder="Usuario"
           onChange={(e) => setEmail(e.target.value)}
         />
       </label>
-      <label>
+      <label className={styles.Label}>
         Contraseña:
         <input
+          className={styles.Input}
           type="password"
           value={password}
+          placeholder="Contraseña"
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>

@@ -8,34 +8,50 @@ import { redirect } from "next/navigation";
 
 const Home = () => {
   const dispatch = useDispatch();
+
+  // Verificar si estamos en el navegador antes de acceder a localStorage
+  const user =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null;
+
   const handleLogout = () => {
     dispatch(logoutUser());
     redirect("/");
   };
 
-  const user = JSON.parse(localStorage.getItem("userInfo"));
-  console.log(user);
   return (
     <div className={styles.ContenedorGeneral}>
       {user ? (
-        <div>
-          <button onClick={handleLogout}>LogOut</button>
+        <div className={styles.ContenedorBtnOut}>
+          <button className={styles.BtnOut} onClick={handleLogout}>
+            LogOut
+          </button>
         </div>
-      ) : null}
-      <div>
-        <h1>BIENVENIDO {user?.user?.username}</h1>
-        {!user ? (
-          <div>
-            <h2>Para obtener todas las funciones de esta app</h2>
+      ) : (
+        <div className={styles.ContenedorBtnOut}>
+          <Link href="/auth" className={styles.BtnOut}>
+            Log In
+          </Link>
+        </div>
+      )}
+      <div className={styles.ContenedorContenido}>
+        <div className={styles.ContenedorContenido2}>
+          <h1 className={styles.Titulo}>CoinControl</h1>
+          <h1>BIENVENIDO {user?.user?.username}</h1>
+          {!user ? (
+            <div>
+              <h2>
+                Para obtener todas las funciones de esta app te recomendamos
+                loguearte
+              </h2>
+            </div>
+          ) : (
             <h2>
-              te recomendamos loguearte <Link href="/auth">aqui</Link>
+              <Link href="/home">Ir al Dashboard</Link>
             </h2>
-          </div>
-        ) : (
-          <h2>
-            Haz <Link href="/home">aqui</Link> para comenzar
-          </h2>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
