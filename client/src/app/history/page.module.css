@@ -1,0 +1,18 @@
+/* MovementHistory.module.css */
+
+.movementsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.movementsTable th,
+.movementsTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.movementsTable th {
+  background-color: #f2f2f2;
+}

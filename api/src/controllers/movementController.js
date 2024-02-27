@@ -3,10 +3,10 @@ const { Movement, Wallet } = require("../db");
 const Decimal = require("decimal.js");
 
 const createMovimiento = async (req, res, next) => {
-  const { walletId, tipo, monto } = req.body;
+  const { walletId, tipo, monto, motivo } = req.body;
 
   try {
-    if (!walletId || !tipo || !monto) {
+    if (!walletId || !tipo || !monto || !motivo) {
       return res
         .status(400)
         .json({ message: "walletId, tipo, and monto are required" });
@@ -16,6 +16,7 @@ const createMovimiento = async (req, res, next) => {
       walletId,
       tipo,
       monto,
+      motivo,
     });
 
     // Actualizar el saldo de la wallet

@@ -19,6 +19,10 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
+    motivo: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     fecha: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,

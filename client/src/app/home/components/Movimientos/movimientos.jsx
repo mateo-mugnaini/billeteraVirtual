@@ -1,82 +1,93 @@
 "use client";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import {
-  increaseWalletBalance,
-  decreaseWalletBalance,
-  fetchWalletInfo,
-} from "@/redux/actions/billeteraAction"; // Ajusta la ruta correcta
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createMovimiento } from "@/redux/actions/movementAction";
+import { fetchWalletDetails } from "@/redux/actions/walletAction";
 
-const Movimientos = () => {
+const MovimientoForm = () => {
   const dispatch = useDispatch();
-  const [monto, setMonto] = useState("");
-  const [tipoMovimiento, setTipoMovimiento] = useState("");
-  const [descripcionMovimiento, setDescripcionMovimiento] = useState("");
-
   const user =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userInfo"))
       : null;
 
-  const userId = user.user.id;
+  const selectedWallet = useSelector((state) => state.wallet.selectedWallet);
+  const userId = user.user.id; // Obtén el userId de tu sistema o desde la autenticación
+  useEffect(() => {
+    dispatch(fetchWalletDetails(userId));
+  }, [dispatch]);
 
-  const handleTipoMovimiento = (tipo) => {
-    setTipoMovimiento(tipo);
-  };
+  const [tipo, setTipo] = useState("Ingreso");
+  const [monto, setMonto] = useState(0);
+  const [motivo, setMotivo] = useState("Deposito");
+  const walletId = selectedWallet?.id; // Puedes obtener este valor de tu estado de Redux o de cualquier otra fuente
 
-  const handleDescripcionChange = (e) => {
-    setDescripcionMovimiento(e.target.value);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleRealizarMovimiento = async () => {
-    if (tipoMovimiento === "Ingreso") {
-      console.log("Aumentando monto:", monto);
-      await dispatch(increaseWalletBalance(userId, Number(monto))); // Reemplaza 1 con el ID del usuario actual
-    } else if (tipoMovimiento === "Egreso") {
-      console.log("Disminuyendo monto:", monto);
-      await dispatch(decreaseWalletBalance(userId, Number(monto))); // Reemplaza 1 con el ID del usuario actual
+    // Crear objeto con la información del movimiento
+    const movimientoData = {
+      walletId,
+      tipo,
+      monto,
+      motivo, // Agregar el motivo al objeto de datos
+    };
+
+    // Llamar a la acción para crear el movimiento
+    const success = await dispatch(createMovimiento(movimientoData));
+
+    // Dentro de la acción createMovimiento en movementAction.js
+    console.log("Movimiento Data:", movimientoData);
+
+    if (success) {
+      // Limpiar el formulario o realizar otras acciones después del éxito
+      setTipo("Ingreso");
+      setMonto(0);
+      setMotivo(""); // Limpiar el motivo
     }
-
-    // Puedes realizar más lógica aquí, como guardar el movimiento en una lista, etc.
-    setMonto("");
-    setTipoMovimiento("");
-    setDescripcionMovimiento("");
-    // Actualizar la información después de realizar el movimiento (opcional)
-    dispatch(fetchWalletInfo(1)); // Reemplaza 1 con el ID del usuario actual
   };
 
   return (
-    <div>
-      <div>
-        <p>Mi movimiento fue:</p>
-        <button onClick={() => handleTipoMovimiento("Ingreso")}>Ingreso</button>
-        <button onClick={() => handleTipoMovimiento("Egreso")}>Egreso</button>
-      </div>
-      {tipoMovimiento && (
-        <div>
-          <label>
-            <input
-              type="text"
-              placeholder={`Ingrese la descripción del ${tipoMovimiento.toLowerCase()}`}
-              value={descripcionMovimiento}
-              onChange={handleDescripcionChange}
-            />
-          </label>
-          <label>
-            Monto:
-            <input
-              type="number"
-              value={monto}
-              onChange={(e) => setMonto(e.target.value)}
-            />
-          </label>
-          <button onClick={handleRealizarMovimiento}>
-            Realizar Movimiento
-          </button>
-        </div>
-      )}
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Tipo:
+        <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
+          <option value="Ingreso">Ingreso</option>
+          <option value="Egreso">Egreso</option>
+        </select>
+      </label>
+      <br />
+      <label>
+        Motivo:
+        <select value={motivo} onChange={(e) => setMotivo(e.target.value)}>
+          {tipo === "Ingreso" ? (
+            <>
+              <option value="Deposito">Depósito</option>
+              <option value="Sueldo">Sueldo</option>
+              <option value="Ventas">Ventas</option>
+              <option value="Otros">Otros</option>
+            </>
+          ) : (
+            <>
+              <option value="Compra">Compra</option>
+              <option value="PagoFacturas">Pago de Facturas</option>
+              <option value="Otros">Otros</option>
+            </>
+          )}
+        </select>
+      </label>
+      <label>
+        Monto:
+        <input
+          type="number"
+          value={monto}
+          onChange={(e) => setMonto(parseFloat(e.target.value))}
+        />
+      </label>
+      <br />
+      <button type="submit">Realizar Movimiento</button>
+    </form>
   );
 };
 
-export default Movimientos;
+export default MovimientoForm;

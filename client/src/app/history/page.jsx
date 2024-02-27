@@ -1,49 +1,73 @@
 "use client";
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchWalletInfo } from "@/redux/actions/billeteraAction";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovements } from "@/redux/actions/movementAction";
+import { fetchWalletDetails } from "@/redux/actions/walletAction";
 
-const MovementsHistory = () => {
+import styles from "./page.module.css"; // Importa tus estilos CSS
+import Navbar from "../components/navbar/navbar";
+
+const MovementHistory = () => {
   const dispatch = useDispatch();
-  const { movements, balance } = useSelector((state) => state.wallet);
+  const ListMovements = useSelector((state) => state.movement.list);
+  console.log(ListMovements);
 
   const user =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userInfo"))
       : null;
 
+  const selectedWallet = useSelector((state) => state.wallet.selectedWallet);
   const userId = user.user.id;
-  console.log(userId);
+  const walletId = selectedWallet?.id;
 
   useEffect(() => {
-    // Puedes cargar la información de la billetera al montar el componente
-    dispatch(fetchWalletInfo(userId));
-  }, [dispatch, userId]);
+    const fetchData = async () => {
+      if (userId) {
+        await dispatch(fetchWalletDetails(userId));
+        if (walletId) {
+          dispatch(fetchMovements(walletId));
+        }
+      }
+    };
+    fetchData();
+  }, [dispatch, userId, walletId]);
+
+  console.log(selectedWallet);
   return (
     <div>
-      <h2>Movimientos de la billetera</h2>
-      <p>Total actual: ${balance.toFixed(2)}</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Tipo</th>
-            <th>Monto</th>
-            <th>Descripción</th>
-            <th>Saldo Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {movements.map((movement, index) => (
-            <tr key={index}>
-              <td>{movement.type === "income" ? "Ingreso" : "Egreso"}</td>
-              <td>${movement.amount.toFixed(2)}</td>
-              <td>{movement.description}</td>
-              <td>${movement.total.toFixed(2)}</td>
+      <Navbar />
+      <h2>Movimientos Recientes</h2>
+      <h1>Saldo Actual: ${selectedWallet.saldo}</h1>
+
+      {ListMovements === null ? (
+        <p>Cargando...</p>
+      ) : ListMovements?.length > 0 ? (
+        <table className={styles.movementsTable}>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Monto</th>
+              <th>Motivo</th>
+              <th>Fecha</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {ListMovements.map((movement) => (
+              <tr key={movement.id}>
+                <td>{movement.tipo}</td>
+                <td>{movement.monto}</td>
+                <td>{movement.motivo}</td>
+                <td>{movement.fecha}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>No hay movimientos registrados</p>
+      )}
     </div>
   );
 };
-export default MovementsHistory;
+
+export default MovementHistory;
