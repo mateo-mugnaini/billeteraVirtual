@@ -1,7 +1,6 @@
-// models/User.js
 const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize) => {
   const User = sequelize.define("user", {
     id: {
       type: DataTypes.INTEGER,
@@ -27,5 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  User.associate = (models) => {
+    User.hasOne(models.Wallet);
+  };
   return User;
 };

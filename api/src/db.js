@@ -1,3 +1,4 @@
+// db.js
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
@@ -15,8 +16,10 @@ const sequelize = new Sequelize(
 
 // Requiere y utiliza el modelo User después de crear la instancia de sequelize
 const User = require("./models/User")(sequelize, Sequelize);
+const Wallet = require("./models/wallet")(sequelize, Sequelize);
+const Movement = require("./models/movement")(sequelize, Sequelize);
 
-const models = {};
+const models = { User, Wallet, Movement };
 
 fs.readdirSync(path.join(__dirname, "/models"))
   .filter((file) => file.endsWith(".js"))
@@ -36,5 +39,6 @@ module.exports = {
   sequelize,
   ...models,
   conn: sequelize,
-  User, // Añade el modelo User a las exportaciones
+  User,
+  Wallet, // Añade el modelo Wallet a las exportaciones
 };

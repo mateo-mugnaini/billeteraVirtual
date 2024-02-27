@@ -1,9 +1,10 @@
-// APP.js
+// app.js
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
+const walletRoutes = require("./routes/walletRoutes"); // Importa las nuevas rutas de la billetera
 
 require("./db.js");
 
@@ -29,6 +30,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/", routes);
+server.use("/api", walletRoutes); // Agrega las nuevas rutas de la billetera después de las rutas existentes
 
 // Error catching endware.
 server.use((err, req, res, next) => {
