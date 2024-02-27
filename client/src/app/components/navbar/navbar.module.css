@@ -1,0 +1,50 @@
+.ContenedorGeneral {
+  /* Estilos para el contenedor general de la barra de navegación */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333; /* Color de fondo de la barra de navegación */
+  color: #fff; /* Color del texto */
+  padding: 10px 20px;
+  width: 100%;
+}
+
+.ContenedorLogo {
+  /* Estilos para el contenedor del logo y el ícono */
+  display: flex;
+  align-items: center;
+}
+
+.Logo {
+  width: 50px;
+  height: 50px;
+}
+
+.Titulo {
+  margin-right: 10px;
+  color: #d9d3c1;
+}
+
+.Link {
+  /* margin-right: 20px; */
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.3rem;
+}
+.Link:hover {
+  color: #d9d3c1;
+}
+
+.BtnOut {
+  font-size: 1.3rem;
+  background-color: #d9534f; /* Color de fondo del botón */
+  color: #fff; /* Color del texto */
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.BtnOut:hover {
+  background-color: #b4201b; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}

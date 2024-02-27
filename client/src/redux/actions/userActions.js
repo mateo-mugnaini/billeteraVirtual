@@ -5,7 +5,6 @@ import {
   setError,
   logoutUserSuccess,
 } from "../slices/userSlice";
-import { redirect } from "next/navigation";
 
 /* ===================== USER REGISTER ===================== */
 export const registerUser = (user) => async (dispatch) => {

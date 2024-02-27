@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "@/redux/actions/userActions";
 import styles from "../pages.module.css";
+import Link from "next/link";
+import { FiArrowLeft } from "react-icons/fi";
 
 const Registro = () => {
   const dispatch = useDispatch();
@@ -37,7 +39,11 @@ const Registro = () => {
   };
 
   return (
-    <form className={styles.ContenedorGeneral} onSubmit={handleSubmit}>
+    <form className={styles.ContenedorGeneralForm} onSubmit={handleSubmit}>
+      <Link href="/" className={styles.BtnVolver}>
+        <FiArrowLeft />
+        Inicio
+      </Link>
       <label className={styles.Label}>
         Usuario:
         <input
@@ -72,7 +78,9 @@ const Registro = () => {
         />
       </label>
 
-      <button type="submit">Registrarse</button>
+      <button className={styles.btn} type="submit">
+        Registrarse
+      </button>
     </form>
   );
 };

@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../redux/actions/userActions";
 import { useRouter } from "next/navigation";
 import styles from "../pages.module.css";
+import Link from "next/link";
+import { FiArrowLeft } from "react-icons/fi";
 
 const Login = () => {
   const router = useRouter();
@@ -20,7 +22,7 @@ const Login = () => {
       if (success) {
         alert("Login successful");
         console.log("Login successful");
-        router.push("/");
+        router.push("/home");
         // Realizar acciones adicionales después de iniciar sesión
       } else {
         alert("Login failed");
@@ -34,7 +36,11 @@ const Login = () => {
   };
 
   return (
-    <form className={styles.ContenedorGeneral} onSubmit={handleLogin}>
+    <form className={styles.ContenedorGeneralForm} onSubmit={handleLogin}>
+      <Link href="/" className={styles.BtnVolver}>
+        <FiArrowLeft />
+        Inicio
+      </Link>
       <label className={styles.Label}>
         Usuario:
         <input
@@ -55,7 +61,9 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
-      <button type="submit">Iniciar Sesión</button>
+      <button className={styles.btn} type="submit">
+        Iniciar Sesión
+      </button>
     </form>
   );
 };

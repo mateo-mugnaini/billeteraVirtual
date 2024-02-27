@@ -30,27 +30,10 @@
   font-size: 3rem;
 }
 
-/* .LoginLeft {
-  transform: translateX(-78%);
+.Logo {
+  width: 70px;
+  height: 70px;
 }
-
-.RegisterRight {
-  transform: translateX(78%);
-} */
-/* 
-.TituloIzq {
-  position: absolute;
-  top: 50%;
-  right: 20rem; 
-  transform: translate(0, -50%);
-}
-
-.TituloDer {
-  position: absolute;
-  top: 50%;
-  right: 2rem;
-  transform: translate(0, -50%);
-} */
 
 .Contenedor1 {
   background-color: #d9d3c1;

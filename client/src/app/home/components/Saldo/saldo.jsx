@@ -59,7 +59,8 @@ const Saldo = () => {
 
   return (
     <div className={styles.ContenedorGeneral}>
-      <h1>Saldo Actual: {selectedWallet.saldo}</h1>
+      <h1 className={styles.Saldo}>Saldo Actual</h1>
+      <h1 className={styles.Saldo}>$ {selectedWallet.saldo}</h1>
     </div>
   );
 };

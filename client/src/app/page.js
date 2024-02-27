@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "@/redux/actions/userActions";
 import { redirect } from "next/navigation";
+import { FiTrendingUp } from "react-icons/fi";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -24,12 +25,20 @@ const Home = () => {
     <div className={styles.ContenedorGeneral}>
       {user ? (
         <div className={styles.ContenedorBtnOut}>
+          <div className={styles.ContenedorLogo}>
+            <h1 className={styles.Titulo}>Cashflow Trucker</h1>
+            <FiTrendingUp className={styles.Logo} />
+          </div>
           <button className={styles.BtnOut} onClick={handleLogout}>
             LogOut
           </button>
         </div>
       ) : (
         <div className={styles.ContenedorBtnOut}>
+          <div className={styles.ContenedorLogo}>
+            <h1 className={styles.Titulo}>Cashflow Trucker</h1>
+            <FiTrendingUp className={styles.Logo} />
+          </div>
           <Link href="/auth" className={styles.BtnOut}>
             Log In
           </Link>
@@ -37,8 +46,7 @@ const Home = () => {
       )}
       <div className={styles.ContenedorContenido}>
         <div className={styles.ContenedorContenido2}>
-          <h1 className={styles.Titulo}>CoinControl</h1>
-          <h1>BIENVENIDO {user?.user?.username}</h1>
+          <h1 className={styles.Titulo}>BIENVENIDO {user?.user?.username}</h1>
           {!user ? (
             <div>
               <h2>

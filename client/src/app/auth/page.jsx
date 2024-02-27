@@ -4,6 +4,8 @@ import Login from "./components/login/page";
 import Register from "./components/register/page";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import { FiTrendingUp } from "react-icons/fi";
+
 const Auth = () => {
   const router = useRouter();
   useEffect(() => {
@@ -43,7 +45,8 @@ const Auth = () => {
         </div>
       </div>
       <div className={styles.ContenedorTitulo}>
-        <h1 className={styles.Titulo}>CoinControl</h1>
+        <h1 className={styles.Titulo}>Cashflow Trucker</h1>
+        <FiTrendingUp className={styles.Logo} />
       </div>
     </div>
   );
