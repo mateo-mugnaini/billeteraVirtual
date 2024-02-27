@@ -2,6 +2,7 @@
 const { User } = require("../db");
 const jwt = require("jsonwebtoken"); // Agrega esta línea
 const secret = "tu_clave_secreta_aqui";
+const { createWallet } = require("./walletController"); // Asegúrate de tener la ruta correcta
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -28,6 +29,7 @@ const getUserById = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   const { username, email, password } = req.body;
+
   try {
     // Verificar que los campos requeridos estén presentes
     if (!username || !email || !password) {
@@ -41,6 +43,9 @@ const createUser = async (req, res, next) => {
       email,
       password,
     });
+
+    // Llama a la función createWallet para crear automáticamente una wallet para el nuevo usuario
+    await createWallet({ body: { userId: newUser.id } }, res, next);
 
     res.status(201).json(newUser);
   } catch (error) {
